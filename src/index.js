@@ -121,9 +121,9 @@ const newCardLink = document.querySelector('.popup__input_type_url')
     
   createCard(newCardElement, deleteCard)
   cardList.prepend(newCardElement)
-  newCardForm.classList.add('popup_is-opened')
+  newCardForm.classList.add('popup_is-opened') 
   })
 
 // add new card
 
-newCardForm.addEventListener('submit')
+newCardForm.addEventListener('submit', createCard)
