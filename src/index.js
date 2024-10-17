@@ -9,7 +9,7 @@ const cardTemplate = document.querySelector("#card-template").content;
 // @todo: DOM узлы
 
 const cardList = document.querySelector(".places__list");
-const buttonNewCard = document.querySelector(".profile__add-button");
+const newCardBtn = document.querySelector('.profile__add-button');
 
 // @todo: Функция создания карточки
 
@@ -17,6 +17,8 @@ function createCard(cardData, deleteCard) {
   const cardElement = cardTemplate
     .querySelector(".places__item")
     .cloneNode(true);
+  
+
   const cardImage = cardElement.querySelector(".card__image");
   const cardTitle = cardElement.querySelector(".card__title");
 
@@ -57,13 +59,13 @@ const closeBtn = document.querySelector('.popup__close')
 editProfileBtn.addEventListener('click', function (){
   document.querySelector('.popup__input_type_name').value = 'Жак-Ив Кусто'
   document.querySelector('.popup__input_type_description').value = 'Исследователь океана'
-  popupForm.classList.add('popup_is-opened') 
+  popupForm.classList.add('popup_is-opened')
 })
 
-//close profile
+//close profile 
 
 closeBtn.addEventListener('click', function (){
-  popupForm.classList.remove('popup_is-opened') 
+  popupForm.classList.remove('popup_is-opened');
 })
 
 //close by overlay
@@ -84,18 +86,44 @@ document.addEventListener('keydown', function(evt) {
 
 //form fields
 
-const formElement = document.querySelector('.popup_form')
+const formElement = document.querySelector('.popup_type_edit')
 const nameInput = document.querySelector('.popup__input_type_name')
 const jobInput = document.querySelector('.popup__input_type_description')
 
+const userName = document.querySelector('.profile__title');
+const userDescription = document.querySelector('.profile__description')
+
 function handleFormSubmit(evt) {
     evt.preventDefault();
-
-    document.querySelector('.popup__input_type_name').value = nameForm
-    document.querySelector('.popup__input_type_description').value = descriptionForm
-
-  
     
-}
+    userName.textContent = nameInput.value
+    userDescription.textContent = jobInput.value
+   
+    formElement.classList.remove('popup_is-opened') 
+  }
 
-formElement.addEventListener('submit', handleFormSubmit);
+formElement.addEventListener('submit', handleFormSubmit)
+
+
+// new card function 
+
+const newCardForm = document.querySelector('.popup_type_new-card')
+const newCardname = document.querySelector('.popup__input_type_card-name')
+const newCardLink = document.querySelector('.popup__input_type_url')
+
+  const newCardElement = {
+  name: newCardname.value,
+  link: newCardLink.value
+  }
+
+  newCardBtn.addEventListener('click', function(evt){
+    evt.preventDefault();
+    
+  createCard(newCardElement, deleteCard)
+  cardList.prepend(newCardElement)
+  newCardForm.classList.add('popup_is-opened')
+  })
+
+// add new card
+
+newCardForm.addEventListener('submit')
