@@ -8,31 +8,50 @@ const cardTemplate = document.querySelector("#card-template").content;
 
 // @todo: DOM узлы
 
-const cardList = document.querySelector(".places__list");
+const cardList = document.querySelector('.places__list');
 const newCardBtn = document.querySelector('.profile__add-button');
 
 // @todo: Функция создания карточки
 
-function createCard(cardData, deleteCard) {
+function createCard(cardData, deleteCard, likeCard, openImage) {
   const cardElement = cardTemplate
-    .querySelector(".places__item")
+    .querySelector('.places__item')
     .cloneNode(true);
   
 
-  const cardImage = cardElement.querySelector(".card__image");
-  const cardTitle = cardElement.querySelector(".card__title");
+  const cardImage = cardElement.querySelector('.card__image');
+  const cardTitle = cardElement.querySelector('.card__title');
+  const cardLikeBtn = cardElement.querySelector('.card__like-button')
 
   cardImage.src = cardData.link;
   cardImage.alt = cardData.name;
   cardTitle.textContent = cardData.name;
 
+  cardLikeBtn.addEventListener('click', likeCard)
+  cardImage.addEventListener('click', () => openImage(cardElement))
+
   cardElement
-    .querySelector(".card__delete-button")
-    .addEventListener("click", () => {
+    .querySelector('.card__delete-button')
+    .addEventListener('click', () => {
       deleteCard(cardElement)
     })
   return cardElement;
 }
+
+  const image = document.querySelector('.popup_type_image')
+  const imagePopup = document.querySelector('.popup__image')
+  const captionPopup = document.querySelector('.popup__caption'); 
+
+ function openImage(evt){
+  imagePopup.src = evt.target.src
+  imagePopup.alt = evt.target.alt 
+  captionPopup.textContent = evt.target.alt
+
+  image.classList.add('popup_is-opened')
+  }
+
+ 
+ 
 
 // @todo: Функция удаления карточки
 
@@ -105,25 +124,34 @@ function handleFormSubmit(evt) {
 formElement.addEventListener('submit', handleFormSubmit)
 
 
-// new card function 
+// add new card  
 
 const newCardForm = document.querySelector('.popup_type_new-card')
 const newCardname = document.querySelector('.popup__input_type_card-name')
 const newCardLink = document.querySelector('.popup__input_type_url')
 
-  const newCardElement = {
+// new card function
+
+newCardForm.addEventListener('submit', function (){
+evt.preventDefault();
+
+const newCardValues = {
   name: newCardname.value,
-  link: newCardLink.value
-  }
+  link: newCardLink.value,
+}
 
-  newCardBtn.addEventListener('click', function(evt){
-    evt.preventDefault();
-    
-  createCard(newCardElement, deleteCard)
-  cardList.prepend(newCardElement)
-  newCardForm.classList.add('popup_is-opened') 
-  })
+const newCardElement = createCard(newCardValues, deleteCard)
 
-// add new card
+cardList.prepend(newCardElement)
 
-newCardForm.addEventListener('submit', createCard)
+})
+
+
+// card like
+
+function likeCard(evt) {
+  if (evt.target.classList.contains('card__like-button')) 
+  {evt.target.classList.toggle('card__like-button_is-active')}
+}
+
+document.addEventListener('click', likeCard)
