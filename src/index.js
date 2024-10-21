@@ -28,7 +28,7 @@ function createCard(cardData, deleteCard, likeCard, openImage) {
   cardTitle.textContent = cardData.name;
 
   cardLikeBtn.addEventListener('click', likeCard)
-  cardImage.addEventListener('click', () => openImage(cardElement))
+  cardImage.addEventListener('click', () => openImage(cardData))
 
   cardElement
     .querySelector('.card__delete-button')
@@ -38,20 +38,21 @@ function createCard(cardData, deleteCard, likeCard, openImage) {
   return cardElement;
 }
 
+// открытие изображения по клику
+
   const image = document.querySelector('.popup_type_image')
   const imagePopup = document.querySelector('.popup__image')
   const captionPopup = document.querySelector('.popup__caption'); 
 
- function openImage(evt){
-  imagePopup.src = evt.target.src
-  imagePopup.alt = evt.target.alt 
-  captionPopup.textContent = evt.target.alt
+ function openImage(cardData){
+  imagePopup.src = cardData.link
+  imagePopup.alt = cardData.name
+  captionPopup.textContent = cardData.name
 
-  image.classList.add('popup_is-opened')
+  openModal(image)
   }
 
- 
- 
+  document.addEventListener('click', openImage)
 
 // @todo: Функция удаления карточки
 
@@ -66,8 +67,12 @@ function cardRender(container, cardData) {
 }
 
 initialCards.forEach(function(elem) {
-  cardRender(cardList, createCard(elem, deleteCard)); 
+  cardRender(cardList, createCard(elem, deleteCard, likeCard, openModal, openImage)); 
 }); 
+
+function openModal(popup){
+  popup.classList.add('popup_is-opened')
+}
  
 // edit profile
 
@@ -130,9 +135,13 @@ const newCardForm = document.querySelector('.popup_type_new-card')
 const newCardname = document.querySelector('.popup__input_type_card-name')
 const newCardLink = document.querySelector('.popup__input_type_url')
 
+  function closeModal(newCardForm){
+      newCardForm.classList.remove('popup_is-opened')
+    }
+
 // new card function
 
-newCardForm.addEventListener('submit', function (){
+newCardForm.addEventListener('submit', function (evt){
 evt.preventDefault();
 
 const newCardValues = {
@@ -143,9 +152,13 @@ const newCardValues = {
 const newCardElement = createCard(newCardValues, deleteCard)
 
 cardList.prepend(newCardElement)
-
+evt.target.reset()
+closeModal(newCardForm)
 })
 
+newCardBtn.addEventListener('click', function(){
+openModal(newCardForm)
+})
 
 // card like
 
