@@ -90,9 +90,9 @@ editProfileBtn.addEventListener('click', function (){
   popupForm.classList.add('popup_is-opened')
 })
 
-//close profile 
+//close profile by X
 
-document.addEventListener('click', function (evt){
+popupForm.addEventListener('click', function (evt){
   if (evt.target === closeBtn){
   closeModal(popupForm)
   }
@@ -166,6 +166,14 @@ closeModal(newCardForm)
 newCardBtn.addEventListener('click', function(){
 openModal(newCardForm)
 })
+
+newCardForm.addEventListener('click',function(evt){
+  if (evt.currentTarget === evt.target){
+    closeModal(newCardForm)
+  }
+})
+
+
 
 // card like
 
