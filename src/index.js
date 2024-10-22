@@ -52,7 +52,11 @@ function createCard(cardData, deleteCard, likeCard, openImage) {
   openModal(image)
   }
 
-  document.addEventListener('click', openImage)
+  image.addEventListener('click',function(evt){
+    if (evt.currentTarget === evt.target){
+      closeModal(image)
+    }
+  })
 
 // @todo: Функция удаления карточки
 
@@ -67,7 +71,7 @@ function cardRender(container, cardData) {
 }
 
 initialCards.forEach(function(elem) {
-  cardRender(cardList, createCard(elem, deleteCard, likeCard, openModal, openImage)); 
+  cardRender(cardList, createCard(elem, deleteCard, likeCard, openImage, openModal)); 
 }); 
 
 function openModal(popup){
@@ -88,23 +92,27 @@ editProfileBtn.addEventListener('click', function (){
 
 //close profile 
 
-closeBtn.addEventListener('click', function (){
-  popupForm.classList.remove('popup_is-opened');
+document.addEventListener('click', function (evt){
+  if (evt.target === closeBtn){
+  closeModal(popupForm)
+  }
 })
 
 //close by overlay
 
-window.onclick = function(evt){
-  if (evt.target === popupForm){
-    popupForm.classList.remove('popup_is-opened') 
+popupForm.addEventListener('click',function(evt){
+  if (evt.currentTarget === evt.target){
+    closeModal(popupForm)
   }
-}
+})
 
 //close by Esc
 
 document.addEventListener('keydown', function(evt) {
   if (evt.key === "Escape") {
     popupForm.classList.remove('popup_is-opened')
+    newCardForm.classList.remove('popup_is-opened')
+    image.classList.remove('popup_is-opened')
   }
 });
 
@@ -128,15 +136,14 @@ function handleFormSubmit(evt) {
 
 formElement.addEventListener('submit', handleFormSubmit)
 
-
 // add new card  
 
 const newCardForm = document.querySelector('.popup_type_new-card')
 const newCardname = document.querySelector('.popup__input_type_card-name')
 const newCardLink = document.querySelector('.popup__input_type_url')
 
-  function closeModal(newCardForm){
-      newCardForm.classList.remove('popup_is-opened')
+  function closeModal(popup){
+      popup.classList.remove('popup_is-opened')
     }
 
 // new card function
