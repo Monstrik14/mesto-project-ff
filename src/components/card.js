@@ -1,10 +1,10 @@
 export {createCard, likeCard, deleteCard}
 
-// @todo: Темплейт карточки
+// card template
 
 const cardTemplate = document.querySelector("#card-template").content;
 
-// Функция создания карточки
+// create card
 
 function createCard(cardData, deleteCard, likeCard, openImage) {
   const cardElement = cardTemplate
@@ -31,7 +31,7 @@ function createCard(cardData, deleteCard, likeCard, openImage) {
   return cardElement;
 }
 
-// @todo: Функция удаления карточки
+// delete card
 
 function deleteCard(cardElement) {
   cardElement.remove();

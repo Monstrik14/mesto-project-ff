@@ -1,15 +1,16 @@
-import './pages/index.css'
+//import 
 
+import './pages/index.css'
 import {initialCards} from './cards'
 import { openModal, closeModal } from './components/modal';
 import { createCard, likeCard, deleteCard } from './components/card';
 
-// @todo: DOM узлы
+// DOM
 
 const cardList = document.querySelector('.places__list');
 const newCardBtn = document.querySelector('.profile__add-button');
 
-// открытие изображения по клику
+// open image by click
 
   const image = document.querySelector('.popup_type_image')
   const imagePopup = document.querySelector('.popup__image')
@@ -29,7 +30,7 @@ const newCardBtn = document.querySelector('.profile__add-button');
     }
   })
 
-// @todo: Вывести карточки на страницу
+// card render
 
 function cardRender(container, cardData) {
   container.append(cardData);
@@ -49,6 +50,19 @@ editProfileBtn.addEventListener('click', function (){
   document.querySelector('.popup__input_type_name').value = 'Жак-Ив Кусто'
   document.querySelector('.popup__input_type_description').value = 'Исследователь океана'
   popupForm.classList.add('popup_is-opened')
+})
+
+popupForm.addEventListener('click',function(evt){
+  if (evt.currentTarget === evt.target){
+    closeModal(popupForm)
+  }
+})
+
+closeBtn.forEach(item=> {
+  const modal = item.closest('.popup')
+  item.addEventListener('click', () =>{
+    closeModal(modal)
+  })
 })
 
 //form fields
@@ -77,7 +91,7 @@ const newCardForm = document.querySelector('.popup_type_new-card')
 const newCardname = document.querySelector('.popup__input_type_card-name')
 const newCardLink = document.querySelector('.popup__input_type_url')
 
-// new card function
+// new card
 
 newCardForm.addEventListener('submit', function (evt){
 evt.preventDefault();

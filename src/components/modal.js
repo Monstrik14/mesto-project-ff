@@ -6,4 +6,4 @@ function openModal(popup){
 
 function closeModal(popup){
   popup.classList.remove('popup_is-opened')
-}
+} 
