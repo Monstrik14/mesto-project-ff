@@ -1,6 +1,7 @@
 import './pages/index.css'
 
 import {initialCards} from './cards'
+import { openModal, closeModal } from '../components/modal';
 
 // @todo: Темплейт карточки
 
@@ -74,9 +75,7 @@ initialCards.forEach(function(elem) {
   cardRender(cardList, createCard(elem, deleteCard, likeCard, openImage, openModal)); 
 }); 
 
-function openModal(popup){
-  popup.classList.add('popup_is-opened')
-}
+
  
 // edit profile
 
@@ -91,9 +90,7 @@ editProfileBtn.addEventListener('click', function (){
 })
 //close function
 
-function closeModal(popup){
-  popup.classList.remove('popup_is-opened')
-}
+
 
 //close by X
 
