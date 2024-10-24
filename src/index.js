@@ -82,21 +82,27 @@ function openModal(popup){
 
 const popupForm = document.querySelector('.popup_type_edit')
 const editProfileBtn = document.querySelector('.profile__edit-button')
-const closeBtn = document.querySelector('.popup__close')
+const closeBtn = document.querySelectorAll('.popup__close')
 
 editProfileBtn.addEventListener('click', function (){
   document.querySelector('.popup__input_type_name').value = 'Жак-Ив Кусто'
   document.querySelector('.popup__input_type_description').value = 'Исследователь океана'
   popupForm.classList.add('popup_is-opened')
 })
+//close function
 
-//close profile by X
+function closeModal(popup){
+  popup.classList.remove('popup_is-opened')
+}
 
-popupForm.addEventListener('click', function (evt){
-  if (evt.target === closeBtn){
-  closeModal(popupForm)
-  }
+//close by X
+
+closeBtn.forEach(item => {
+  const modal = item.closest('.popup')
+  item.addEventListener('click', function (){
+  closeModal(modal)
 })
+}) 
 
 //close by overlay
 
@@ -142,9 +148,7 @@ const newCardForm = document.querySelector('.popup_type_new-card')
 const newCardname = document.querySelector('.popup__input_type_card-name')
 const newCardLink = document.querySelector('.popup__input_type_url')
 
-  function closeModal(popup){
-      popup.classList.remove('popup_is-opened')
-    }
+ 
 
 // new card function
 
@@ -173,8 +177,6 @@ newCardForm.addEventListener('click',function(evt){
   }
 })
 
-
-
 // card like
 
 function likeCard(evt) {
@@ -182,4 +184,4 @@ function likeCard(evt) {
   {evt.target.classList.toggle('card__like-button_is-active')}
 }
 
-document.addEventListener('click', likeCard)
+cardTemplate.addEventListener('click', likeCard)
