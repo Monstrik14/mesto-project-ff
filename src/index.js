@@ -1,21 +1,13 @@
 import './pages/index.css'
-import './components/card'
-import './components/modal'
 
 import {initialCards} from './cards'
-import { openModal, closeModal } from '../components/modal';
-import { createCard, likeCard, deleteCard } from '../components/card';
-
-// @todo: Темплейт карточки
-
-const cardTemplate = document.querySelector("#card-template").content;
+import { openModal, closeModal } from './components/modal';
+import { createCard, likeCard, deleteCard } from './components/card';
 
 // @todo: DOM узлы
 
 const cardList = document.querySelector('.places__list');
 const newCardBtn = document.querySelector('.profile__add-button');
-
-
 
 // открытие изображения по клику
 
@@ -37,10 +29,6 @@ const newCardBtn = document.querySelector('.profile__add-button');
     }
   })
 
-
-
-
-
 // @todo: Вывести карточки на страницу
 
 function cardRender(container, cardData) {
@@ -51,8 +39,6 @@ initialCards.forEach(function(elem) {
   cardRender(cardList, createCard(elem, deleteCard, likeCard, openImage, openModal)); 
 }); 
 
-
- 
 // edit profile
 
 const popupForm = document.querySelector('.popup_type_edit')
@@ -64,36 +50,6 @@ editProfileBtn.addEventListener('click', function (){
   document.querySelector('.popup__input_type_description').value = 'Исследователь океана'
   popupForm.classList.add('popup_is-opened')
 })
-//close function
-
-
-
-//close by X
-
-closeBtn.forEach(item => {
-  const modal = item.closest('.popup')
-  item.addEventListener('click', function (){
-  closeModal(modal)
-})
-}) 
-
-//close by overlay
-
-popupForm.addEventListener('click',function(evt){
-  if (evt.currentTarget === evt.target){
-    closeModal(popupForm)
-  }
-})
-
-//close by Esc
-
-document.addEventListener('keydown', function(evt) {
-  if (evt.key === "Escape") {
-    popupForm.classList.remove('popup_is-opened')
-    newCardForm.classList.remove('popup_is-opened')
-    image.classList.remove('popup_is-opened')
-  }
-});
 
 //form fields
 
@@ -120,8 +76,6 @@ formElement.addEventListener('submit', handleFormSubmit)
 const newCardForm = document.querySelector('.popup_type_new-card')
 const newCardname = document.querySelector('.popup__input_type_card-name')
 const newCardLink = document.querySelector('.popup__input_type_url')
-
- 
 
 // new card function
 

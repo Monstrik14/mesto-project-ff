@@ -1,19 +1,8 @@
 export {createCard, likeCard, deleteCard}
 
-// card like
+// @todo: Темплейт карточки
 
-function likeCard(evt) {
-  if (evt.target.classList.contains('card__like-button')) 
-  {evt.target.classList.toggle('card__like-button_is-active')}
-}
-
-cardTemplate.addEventListener('click', likeCard)
-
-// @todo: Функция удаления карточки
-
-function deleteCard(cardElement) {
-  cardElement.remove();
-}
+const cardTemplate = document.querySelector("#card-template").content;
 
 // Функция создания карточки
 
@@ -41,3 +30,18 @@ function createCard(cardData, deleteCard, likeCard, openImage) {
     })
   return cardElement;
 }
+
+// @todo: Функция удаления карточки
+
+function deleteCard(cardElement) {
+  cardElement.remove();
+}
+
+// card like
+
+function likeCard(evt) {
+  if (evt.target.classList.contains('card__like-button')) 
+  {evt.target.classList.toggle('card__like-button_is-active')}
+}
+
+cardTemplate.addEventListener('click', likeCard)
