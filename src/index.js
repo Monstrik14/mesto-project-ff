@@ -19,7 +19,7 @@ const newCardBtn = document.querySelector('.profile__add-button');
  function openImage(cardData){
   imagePopup.src = cardData.link
   imagePopup.alt = cardData.name
-  captionPopup.textContent = cardData.name
+  captionPopup.textContent = cardData.name 
 
   openModal(image)
   }
