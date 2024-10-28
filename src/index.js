@@ -37,28 +37,32 @@ function cardRender(container, cardData) {
 }
 
 initialCards.forEach(function(elem) {
-  cardRender(cardList, createCard(elem, deleteCard, likeCard, openImage, openModal)); 
+  cardRender(cardList, createCard(elem, deleteCard, likeCard, openImage)); 
 }); 
 
 // edit profile
 
-const popupForm = document.querySelector('.popup_type_edit')
+const popupProfileForm = document.querySelector('.popup_type_edit')
 const editProfileBtn = document.querySelector('.profile__edit-button')
-const closeBtn = document.querySelectorAll('.popup__close')
+const closeButtons = document.querySelectorAll('.popup__close')
 
 editProfileBtn.addEventListener('click', function (){
-  document.querySelector('.popup__input_type_name').value = 'Жак-Ив Кусто'
-  document.querySelector('.popup__input_type_description').value = 'Исследователь океана'
-  popupForm.classList.add('popup_is-opened')
+  const popupNameInput = document.querySelector('.popup__input_type_name')
+  const popupDescriptionInput = document.querySelector('.popup__input_type_description')
+
+  popupNameInput.value = userName.textContent;
+  popupDescriptionInput.value = userDescription.textContent;
+
+  openModal(popupProfileForm)
 })
 
-popupForm.addEventListener('click',function(evt){
+popupProfileForm.addEventListener('click',function(evt){
   if (evt.currentTarget === evt.target){
-    closeModal(popupForm)
+    closeModal(popupProfileForm)
   }
 })
 
-closeBtn.forEach(item=> {
+closeButtons.forEach(item=> {
   const modal = item.closest('.popup')
   item.addEventListener('click', () =>{
     closeModal(modal)
@@ -67,23 +71,22 @@ closeBtn.forEach(item=> {
 
 //form fields
 
-const formElement = document.querySelector('.popup_type_edit')
 const nameInput = document.querySelector('.popup__input_type_name')
 const jobInput = document.querySelector('.popup__input_type_description')
 
 const userName = document.querySelector('.profile__title');
 const userDescription = document.querySelector('.profile__description')
 
-function handleFormSubmit(evt) {
+function handleProfileFormSubmit(evt) {
     evt.preventDefault();
     
     userName.textContent = nameInput.value
     userDescription.textContent = jobInput.value
    
-    formElement.classList.remove('popup_is-opened') 
+    closeModal(popupProfileForm)
   }
 
-formElement.addEventListener('submit', handleFormSubmit)
+popupProfileForm.addEventListener('submit', handleProfileFormSubmit)
 
 // add new card  
 
@@ -101,7 +104,7 @@ const newCardValues = {
   link: newCardLink.value,
 }
 
-const newCardElement = createCard(newCardValues, deleteCard)
+const newCardElement = createCard(newCardValues, deleteCard, likeCard, openImage)
 
 cardList.prepend(newCardElement)
 evt.target.reset()
