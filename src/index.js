@@ -22,13 +22,7 @@ const newCardBtn = document.querySelector('.profile__add-button');
   captionPopup.textContent = cardData.name 
 
   openModal(image)
-  }
-
-  image.addEventListener('click',function(evt){
-    if (evt.currentTarget === evt.target){
-      closeModal(image)
-    }
-  })
+  } 
 
 // card render
 
@@ -47,20 +41,21 @@ const editProfileBtn = document.querySelector('.profile__edit-button')
 const closeButtons = document.querySelectorAll('.popup__close')
 
 editProfileBtn.addEventListener('click', function (){
-  const popupNameInput = document.querySelector('.popup__input_type_name')
-  const popupDescriptionInput = document.querySelector('.popup__input_type_description')
+  nameInput.value = userName.textContent;
+  jobInput.value = userDescription.textContent;
 
-  popupNameInput.value = userName.textContent;
-  popupDescriptionInput.value = userDescription.textContent;
-
-  openModal(popupProfileForm)
+  openModal(popupProfileForm) 
 })
 
-popupProfileForm.addEventListener('click',function(evt){
-  if (evt.currentTarget === evt.target){
-    closeModal(popupProfileForm)
-  }
-})
+const popups = document.querySelectorAll('.popup');
+
+popups.forEach((popup) => {
+  popup.addEventListener("mousedown", (evt) => {
+      if (evt.target.classList.contains("popup")) {
+          closeModal(popup);
+      }
+  });
+}); 
 
 closeButtons.forEach(item=> {
   const modal = item.closest('.popup')
@@ -113,11 +108,5 @@ closeModal(newCardForm)
 
 newCardBtn.addEventListener('click', function(){
 openModal(newCardForm)
-})
-
-newCardForm.addEventListener('click',function(evt){
-  if (evt.currentTarget === evt.target){
-    closeModal(newCardForm)
-  }
-})
+}) 
 
