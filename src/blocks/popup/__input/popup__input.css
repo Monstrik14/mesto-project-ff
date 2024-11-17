@@ -25,6 +25,20 @@
   font-weight: 400;
 }
 
+.name-error {
+  color: #FF0000;
+  font-size: 12px;
+  line-height: 14.52px;
+  font-weight: 400;
+}
+
+.description-error {
+  color: #FF0000;
+  font-size: 12px;
+  line-height: 14.52px;
+  font-weight: 400;
+}
+
 @media screen and (max-width: 568px) {
   .popup__title {
     font-size: 12px;
