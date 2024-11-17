@@ -51,11 +51,13 @@ const isValid = (inputElement, validationConfig) => {
     hideInputError(inputElement, validationConfig)
   }
 
+  const hasInvalidInput = (inputList) => {
+    return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+    })
+  }; 
+
 const toggleButtonState = (inputList, buttonElement, validationConfig) => {
-  const hasInvalidInput = () => {
-  inputList.some((inputElement) => {
-    return !inputElement.validity.valid
-  })
  if (hasInvalidInput(inputList)) {
       buttonElement.classList.add(validationConfig.inactiveButtonClass)
       buttonElement.disabled = true
@@ -63,8 +65,7 @@ const toggleButtonState = (inputList, buttonElement, validationConfig) => {
       buttonElement.classList.remove(validationConfig.inactiveButtonClass)
       buttonElement.disabled = false
   } 
-}
-}
+} 
 
 const clearValidation = (formElement, validationConfig) => {
   const inputList = Array.from(formElement.querySelectorAll(validationConfig.inputSelector))
