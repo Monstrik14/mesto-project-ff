@@ -23,6 +23,7 @@ const setEventListeners = (formElement, validationConfig) => {
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", () => {
       isValid(formElement, inputElement, validationConfig);
+      toggleButtonState(inputList, buttonElement);
     });
   });
 };
