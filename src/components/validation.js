@@ -8,7 +8,7 @@ const validationConfig = {
   errorClass: 'popup__error_visible'
 }
 
-const enableValidation = () => {
+const enableValidation = (validationConfig) => {
   const formList = Array.from(document.querySelectorAll(validationConfig.formSelector))
   formList.forEach((formElement) => {
     setEventListeners(formElement, validationConfig)
@@ -24,31 +24,31 @@ const setEventListeners = (formElement, validationConfig) => {
   })
 }
 
-const showInputError = (formElement, inputElement, errorMessage) => {
+const showInputError = (inputElement, errorMessage, validationConfig) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`)
     inputElement.classList.add(validationConfig.inputErrorClass)
     errorElement.textContent = errorMessage
     errorElement.classList.add(validationConfig.errorClass)
 }
 
-const hideInputError = (formElement, inputElement, validationConfig) => {
+const hideInputError = (inputElement, validationConfig) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`)
   inputElement.classList.remove(validationConfig.inputErrorClass)
   errorElement.classList.remove(validationConfig.errorClass)
   errorElement.textContent = ''
 }
 
-const isValid = (formElement, inputElement, validationConfig) => {
+const isValid = (inputElement, validationConfig) => {
   if (inputElement.validity.patternMismatch){
     inputElement.setCustomValidity(inputElement.dataset.errorMessage)
     } else {
-      inputElement.setCustomValidity('')
+      inputElement.setCustomValidity("")
     }
   }
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage)
+    showInputError(inputElement, inputElement.validationMessage, validationConfig)
   } else {
-    hideInputError(formElement, inputElement, validationConfig)
+    hideInputError(inputElement, validationConfig)
   }
 
 const toggleButtonState = (inputList, buttonElement, validationConfig) => {
@@ -57,25 +57,21 @@ const toggleButtonState = (inputList, buttonElement, validationConfig) => {
     return !inputElement.validity.valid
   })
  if (hasInvalidInput(inputList)) {
-      buttonElement.classList.add(validation.inactiveButtonClass)
+      buttonElement.classList.add(validationConfig.inactiveButtonClass)
       buttonElement.disabled = true
   } else {
-      buttonElement.classList.remove(validation.inactiveButtonClass)
+      buttonElement.classList.remove(validationConfig.inactiveButtonClass)
       buttonElement.disabled = false
   } 
 }
 }
 
-const clearValidation = () => {
+const clearValidation = (formElement, validationConfig) => {
   const inputList = Array.from(formElement.querySelectorAll(validationConfig.inputSelector))
+  const buttonElement = formElement.querySelector(validationConfig.submitButtonSelector)
   inputList.forEach((inputElement) => {
     hideInputError(formElement, inputElement, validationConfig)
-    buttonElement.classList.add(validation.inactiveButtonClass)
+    buttonElement.classList.add(validationConfig.inactiveButtonClass)
     buttonElement.disabled = true
 })
-}
-
-// Вызовем функцию isValid на каждый ввод символа***
-inputElement.addEventListener('input', isValid) 
-
-clearValidation(profileForm, validationConfig)
+} 
