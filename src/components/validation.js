@@ -4,7 +4,7 @@ export const validationConfig = {
   submitButtonSelector: ".popup__button",
   inactiveButtonClass: "popup__button_disabled",
   inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__error_visible",
+  errorClass: "popup__error_visible", 
 };
 
 export const enableValidation = (validationConfig) => {
@@ -43,7 +43,7 @@ const hideInputError = (inputElement, validationConfig) => {
   errorElement.textContent = "";
 };
 
-const isValid = (inputElement, validationConfig) => {
+const isValid = (inputElement) => {
   if (inputElement.validity.patternMismatch) {
     inputElement.setCustomValidity(inputElement.dataset.errorMessage);
   } else {
@@ -52,12 +52,13 @@ const isValid = (inputElement, validationConfig) => {
 };
 if (!inputElement.validity.valid) {
   showInputError(
+    formElement,
     inputElement,
     inputElement.validationMessage,
     validationConfig
   );
 } else {
-  hideInputError(inputElement, validationConfig);
+  hideInputError(formElement,inputElement, validationConfig);
 }
 
 const hasInvalidInput = (inputList) => {
