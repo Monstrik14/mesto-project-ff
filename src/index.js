@@ -1,14 +1,17 @@
 //import 
 
 import './pages/index.css'
-import {initialCards} from './cards'
+import { initialCards } from './cards'
 import { openModal, closeModal } from './components/modal';
 import { createCard, likeCard, deleteCard } from './components/card';
+import { enableValidation, validationConfig, clearValidation } from './components/validation';
 
 // DOM
 
 const cardList = document.querySelector('.places__list');
 const newCardBtn = document.querySelector('.profile__add-button');
+
+enableValidation(validationConfig)
 
 // open image by click
 
@@ -40,7 +43,11 @@ const popupProfileForm = document.querySelector('.popup_type_edit')
 const editProfileBtn = document.querySelector('.profile__edit-button')
 const closeButtons = document.querySelectorAll('.popup__close')
 
-editProfileBtn.addEventListener('click', function (){
+editProfileBtn.addEventListener('click', function (evt){
+  evt.preventDefault();
+
+  clearValidation(popupProfileForm, validationConfig);
+  
   nameInput.value = userName.textContent;
   jobInput.value = userDescription.textContent;
 
@@ -110,4 +117,4 @@ newCardBtn.addEventListener('click', function(){
 openModal(newCardForm)
 })
 
-enableValidation(validation)
+
