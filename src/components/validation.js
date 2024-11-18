@@ -20,6 +20,7 @@ const setEventListeners = (formElement, validationConfig) => {
   const inputList = Array.from(
     formElement.querySelectorAll(validationConfig.inputSelector)
   );
+  const buttonElement = formElement.querySelector(validationConfig.submitButtonSelector);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", () => {
       isValid(formElement, inputElement, validationConfig);

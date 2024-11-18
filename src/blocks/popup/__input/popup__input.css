@@ -18,12 +18,11 @@
   border-bottom: 1px solid rgba(255, 0, 0, 1); 
 }
 
-.input-error {
-  font-family: Inter, sans-serif;
+.popup__error_visible {
+  display: block;
   font-weight: 400;
   color: rgba(255, 0, 0, 1);
   font-size: 12px;
-  line-height: 14.52px;
 } 
 
 @media screen and (max-width: 568px) {
