@@ -15,8 +15,6 @@ import {
 const cardList = document.querySelector(".places__list");
 const newCardBtn = document.querySelector(".profile__add-button");
 
-enableValidation(validationConfig); 
-
 // open image by click
 
 const image = document.querySelector(".popup_type_image");
@@ -129,3 +127,5 @@ newCardBtn.addEventListener("click", function (evt) {
 
   clearValidation(newCardForm, validationConfig);
 }); 
+
+enableValidation(validationConfig);
