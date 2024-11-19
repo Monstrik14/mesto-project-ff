@@ -15,7 +15,7 @@ import {
 const cardList = document.querySelector(".places__list");
 const newCardBtn = document.querySelector(".profile__add-button");
 
-enableValidation(validationConfig);
+enableValidation(validationConfig); 
 
 // open image by click
 
