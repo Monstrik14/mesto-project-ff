@@ -6,7 +6,7 @@ export const validationConfig = {
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__error_visible", 
 };
- 
+  
 export const enableValidation = (validationConfig) => {
   const formList = Array.from(
     document.querySelectorAll(validationConfig.formSelector)
