@@ -29,14 +29,14 @@ const setEventListeners = (formElement, validationConfig) => {
   }); 
 };
 
-const showInputError = (inputElement, errorMessage,validationConfig) => {
+const showInputError = (formElement, inputElement, errorMessage,validationConfig) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add(validationConfig.inputErrorClass); 
   errorElement.textContent = errorMessage;
   errorElement.classList.add(validationConfig.errorClass);
 };
 
-const hideInputError = (inputElement, validationConfig) => {
+const hideInputError = (formElement, inputElement, validationConfig) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove(validationConfig.inputErrorClass);
   errorElement.classList.remove(validationConfig.errorClass);
@@ -52,12 +52,13 @@ const isValid = (inputElement) => {
 }; 
 if (!inputElement.validity.valid) {
   showInputError(
+    formElement,
     inputElement,
     inputElement.validationMessage,
     validationConfig
   );
 } else {
-  hideInputError(inputElement, validationConfig);
+  hideInputError(formElement, inputElement, validationConfig);
 }
 
 const hasInvalidInput = (inputList) => {
@@ -84,7 +85,7 @@ export const clearValidation = (formElement, validationConfig) => {
     validationConfig.submitButtonSelector
   );
   inputList.forEach((inputElement) => {
-    hideInputError(inputElement, validationConfig);
+    hideInputError(formElement,inputElement, validationConfig);
     buttonElement.classList.add(validationConfig.inactiveButtonClass);
     buttonElement.disabled = true;
   });
