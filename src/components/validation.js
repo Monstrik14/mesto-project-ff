@@ -40,7 +40,7 @@ const hideInputError = (formElement, inputElement, validationConfig) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove(validationConfig.inputErrorClass);
   errorElement.classList.remove(validationConfig.errorClass);
-  errorElement.textContent = "";
+  errorElement.textContent = ""; 
 };
 
 const isValid = (inputElement) => {
@@ -48,13 +48,13 @@ const isValid = (inputElement) => {
     inputElement.setCustomValidity(inputElement.dataset.errorMessage);
   } else {
     inputElement.setCustomValidity(""); 
-  }
+  } 
 }; 
 if (!inputElement.validity.valid) {
   showInputError(
     formElement,
     inputElement,
-    inputElement.validationMessage,
+    errorMessage,
     validationConfig
   );
 } else {
