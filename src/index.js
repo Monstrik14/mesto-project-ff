@@ -2,13 +2,13 @@
 
 import "./pages/index.css";
 import { initialCards } from "./cards";  
-import { openModal, closeModal } from "../components/modal";
-import { createCard, likeCard, deleteCard } from "../components/card";
+import { openModal, closeModal } from "./components/modal";
+import { createCard, likeCard, deleteCard } from "./components/card";
 import {
   enableValidation,
   validationConfig,
   clearValidation,
-} from "../components/validation";
+} from "./components/validation";
 
 // DOM
 
