@@ -23,7 +23,7 @@ const setEventListeners = (formElement, validationConfig) => {
   const buttonElement = formElement.querySelector(validationConfig.submitButtonSelector);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", () => {
-      isValid(inputElement,validationConfig); 
+      isValid(inputElement); 
       toggleButtonState(inputList, buttonElement, validationConfig);
     });
   }); 
@@ -43,7 +43,7 @@ const hideInputError = (inputElement, validationConfig) => {
   errorElement.textContent = "";
 };
 
-const isValid = (inputElement, validationConfig) => {
+const isValid = (inputElement) => {
   if (inputElement.validity.patternMismatch) {
     inputElement.setCustomValidity(inputElement.dataset.errorMessage);
   } else {
