@@ -29,10 +29,10 @@ const setEventListeners = (formElement, validationConfig) => {
   }); 
 };
 
-const showInputError = (formElement, inputElement, errorMessage,validationConfig) => {
+const showInputError = (formElement, inputElement,validationConfig) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add(validationConfig.inputErrorClass); 
-  errorElement.textContent = errorMessage;
+  errorElement.textContent = inputElement.validationMessage;
   errorElement.classList.add(validationConfig.errorClass);
 };
 
@@ -43,7 +43,7 @@ const hideInputError = (formElement, inputElement, validationConfig) => {
   errorElement.textContent = ""; 
 };
 
-const isValid = (formElement, inputElement, errorMessage, validationConfig) => {
+const isValid = (formElement, inputElement, validationConfig) => {
   if (inputElement.validity.patternMismatch) {
     inputElement.setCustomValidity(inputElement.dataset.errorMessage);
   } else {
@@ -53,7 +53,6 @@ if (!inputElement.validity.valid) {
   showInputError(
     formElement,
     inputElement,
-    errorMessage,
     validationConfig
   );
 } else {

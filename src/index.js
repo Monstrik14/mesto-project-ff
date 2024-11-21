@@ -8,7 +8,7 @@ import {
   enableValidation,
   validationConfig,
   clearValidation,
-} from "./components/validation";
+} from "./components/validation"; 
 
 // DOM
 
