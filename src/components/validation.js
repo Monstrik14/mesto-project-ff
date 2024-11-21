@@ -33,14 +33,15 @@ const showInputError = (formElement, inputElement,validationConfig) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add(validationConfig.inputErrorClass); 
   errorElement.textContent = inputElement.validationMessage;
-  errorElement.classList.add(validationConfig.errorClass); 
+  errorElement.classList.add(validationConfig.errorClass);
 };
 
 const hideInputError = (formElement, inputElement, validationConfig) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove(validationConfig.inputErrorClass);
+  errorElement.textContent = "";
   errorElement.classList.remove(validationConfig.errorClass);
-  errorElement.textContent = ""; 
+  
 };
 
 const isValid = (formElement, inputElement, validationConfig) => {
