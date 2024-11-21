@@ -43,13 +43,12 @@ const hideInputError = (formElement, inputElement, validationConfig) => {
   errorElement.textContent = ""; 
 };
 
-const isValid = (inputElement) => {
+const isValid = (formElement, inputElement, errorMessage, validationConfig) => {
   if (inputElement.validity.patternMismatch) {
     inputElement.setCustomValidity(inputElement.dataset.errorMessage);
   } else {
     inputElement.setCustomValidity(""); 
   } 
-}; 
 if (!inputElement.validity.valid) {
   showInputError(
     formElement,
@@ -60,6 +59,7 @@ if (!inputElement.validity.valid) {
 } else {
   hideInputError(formElement, inputElement, validationConfig);
 }
+};
 
 const hasInvalidInput = (inputList) => {
   return inputList.some((inputElement) => {
