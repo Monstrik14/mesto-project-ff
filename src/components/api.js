@@ -31,27 +31,28 @@ export const getUsersData = () => {
   .then(getResponse);
 };
 
-export const profileEditing = () =>{ 
+export const profileEditing = (name, about) =>{ 
 return (
   fetch(`${config.baseUrl}/users/me`), {
   method: 'PATCH',
-  headers: {
-    authorization: "9774dcb0-c38f-40ae-87b7-691b274b96f1",
-    'Content-Type': 'application/json'
-  },
+  headers: config.headers,
   body: JSON.stringify({
-    name: '',
-    about: '',
+    name: name,
+    about: about,
   })
 })
 }
 
-fetch("https://nomoreparties.co/v1/pwff-cohort-1/cards", {
-  headers: {
-    authorization: "9774dcb0-c38f-40ae-87b7-691b274b96f1",
-  },
-})
-  .then((res) => res.json())
-  .then((result) => {
-    console.log(result);
-  });
+export const newCardForServer = (serverCard, serverLink) =>{ 
+  return (
+    fetch(`${config.baseUrl}/cards`), {
+    method: 'POST',
+    headers: config.headers,
+    body: JSON.stringify({
+      name: serverCard,
+      link: serverLink,
+    })
+  })
+  }
+
+

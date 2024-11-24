@@ -9,7 +9,7 @@ import {
   validationConfig,
   clearValidation,
 } from "./components/validation"; 
-import { getUsersData, getInitialCards } from './components/api'; 
+import { getUsersData, getInitialCards, profileEditing } from './components/api'; 
 
 //Promise.all
 
@@ -102,7 +102,7 @@ popupProfileForm.addEventListener("submit", handleProfileFormSubmit);
 // add new card
 
 const newCardForm = document.querySelector(".popup_type_new-card");
-const newCardname = document.querySelector(".popup__input_type_card-name");
+const newCardName = document.querySelector(".popup__input_type_card-name");
 const newCardLink = document.querySelector(".popup__input_type_url");
 
 // new card
@@ -111,7 +111,7 @@ newCardForm.addEventListener("submit", function (evt) {
   evt.preventDefault();
 
   const newCardValues = {
-    name: newCardname.value,
+    name: newCardName.value,
     link: newCardLink.value,
   };
 
