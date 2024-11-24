@@ -9,6 +9,13 @@ import {
   validationConfig,
   clearValidation,
 } from "./components/validation"; 
+import { getUsersData, getInitialCards } from './components/api'; 
+
+//Promise.all
+
+Promise.all([getUsersData, getInitialCards]){
+  .then()
+}
 
 // DOM
 
