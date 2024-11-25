@@ -41,18 +41,49 @@ return (
     about: about,
   })
 })
+.then(getResponse);
 }
 
-export const newCardForServer = (serverCard, serverLink) =>{ 
+export const newCardForServer = (newCard, newLink) => { 
   return (
     fetch(`${config.baseUrl}/cards`), {
     method: 'POST',
     headers: config.headers,
     body: JSON.stringify({
-      name: serverCard,
-      link: serverLink,
+      name: newCard,
+      link: newLink,
     })
   })
+  .then(getResponse);
   }
+
+  export const deleteCardFromServer = (cardId) => {
+    return (
+      fetch(`${config.baseUrl}/cards/${cardId}`), {
+      method: 'DELETE',
+      headers: config.headers,
+      })
+      .then(getResponse);
+    }
+
+  export const putLike = (cardId) => {
+    return (
+      fetch(`${config.baseUrl}/cards/likes/${cardId}`), {
+      method: 'PUT',
+      headers: config.headers,
+      })
+      .then(getResponse);
+    }
+
+    export const deleteLike = (cardId) => {
+      return (
+        fetch(`${config.baseUrl}/cards/likes/${cardId}`), {
+        method: 'DELETE',
+        headers: config.headers,
+        })
+        .then(getResponse);
+      }
+
+
 
 
