@@ -1,9 +1,7 @@
 export {createCard, likeCard, deleteCard}
 
-//const
 
-const likeButton = document.querySelector('.card__like-button')
-const likeCounter = document.querySelector('card__like-counter') 
+
 
 // card template
 
@@ -19,7 +17,9 @@ function createCard(cardData, deleteCard, likeCard, openImage) {
 
   const cardImage = cardElement.querySelector('.card__image');
   const cardTitle = cardElement.querySelector('.card__title');
-  const cardLikeBtn = cardElement.querySelector('.card__like-button')
+  const cardLikeBtn = cardElement.querySelector('.card__like-button');
+  const likeButton = document.querySelector('.card__like-button');
+  const likeCounter = document.querySelector('card__like-counter'); 
 
   cardImage.src = cardData.link;
   cardImage.alt = cardData.name;
