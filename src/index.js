@@ -1,7 +1,7 @@
 //import
 
 import "./pages/index.css";
-import { initialCards } from "./cards";  
+ 
 import { openModal, closeModal } from "./components/modal";
 import { createCard, likeCard, deleteCard } from "./components/card";
 import {
@@ -9,13 +9,34 @@ import {
   validationConfig,
   clearValidation,
 } from "./components/validation"; 
-import { getUsersData, getInitialCards, profileEditing } from './components/api'; 
+import { getUserData, getInitialCards, profileEditing, newCardForServer, editAvatar } from './components/api'; 
+// import { initialCards } from "./cards";  
+
+//DOM
+
+const placesList = document.querySelector('.places__list')
+const profileName = document.querySelector('.profile__title'); 
+const profileDescription = document.querySelector('.profile__description'); 
+const profileImage = document.querySelector('.profile__image');
+
+//avatar
+
 
 //Promise.all
+let userId = "";
 
-Promise.all([getUsersData, getInitialCards]){
-  .then()
-}
+Promise.all([getUserData(), getInitialCards()])
+  .then(([userData, cardsData]) => {
+    profileName.textContent = userData.name
+    profileDescription.textContent = userData.about
+    profileImage.style.backgroundImage = `url(${userData.avatar})`;
+    
+    userId = userData._id
+    cardsData.forEach((element) => {
+      const newCard = createCard(element, deleteCard, openImage, userId)
+      placesList.append(newCard)
+    })
+  })
 
 // DOM
 
@@ -136,3 +157,7 @@ newCardBtn.addEventListener("click", function (evt) {
 }); 
 
 enableValidation(validationConfig);
+
+const showLoading = (button) => {
+  button.textContent = 'Сохранение...';
+ };

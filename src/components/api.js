@@ -21,7 +21,7 @@ export const getInitialCards = () => {
   }).then(getResponse);
 };
 
-export const getUsersData = () => {
+export const getUserData = () => {
   return (
     fetch(`${config.baseUrl}/users/me`),
     {
@@ -83,7 +83,17 @@ export const newCardForServer = (newCard, newLink) => {
         })
         .then(getResponse);
       }
-
+      export const editAvatar = (avatar) => {
+        return (
+          fetch(`${config.baseUrl}/users/me/avatar`), {
+          method: 'PATCH',
+          headers: config.headers,
+          body: JSON.stringify({
+            avatar: avatar
+          })
+          })
+          .then(getResponse);
+        }
 
 
 

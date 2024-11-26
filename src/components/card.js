@@ -1,5 +1,10 @@
 export {createCard, likeCard, deleteCard}
 
+//const
+
+const likeButton = document.querySelector('.card__like-button')
+const likeCounter = document.querySelector('card__like-counter') 
+
 // card template
 
 const cardTemplate = document.querySelector("#card-template").content;
@@ -40,6 +45,7 @@ function deleteCard(cardElement) {
 // card like
 
 function likeCard(evt) {
+  let count;
   if (evt.target.classList.contains('card__like-button')) 
   {evt.target.classList.toggle('card__like-button_is-active')}
 } 
