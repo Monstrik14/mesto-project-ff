@@ -55,13 +55,7 @@ function openImage(cardData) {
   captionPopup.textContent = cardData.name;
 
   openModal(image);
-}
-
-// card render
-
-function cardRender(container, cardData) {
-  container.append(cardData);
-}
+} 
 
 // edit profile
 
