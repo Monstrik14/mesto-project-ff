@@ -17,7 +17,7 @@ function createCard(cardData, deleteCard, likeCard, openImage) {
   const cardLikeBtn = cardElement.querySelector('.card__like-button');
   const cardDeletBtn = cardElement.querySelector('.card__delete-button');
   const likeCounter = cardElement.querySelector('card__like-counter');
-  const cardId = element._id  
+  const cardId = cardData._id  
 
   cardImage.src = cardData.link;
   cardImage.alt = cardData.name;
