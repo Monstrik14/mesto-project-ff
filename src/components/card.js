@@ -1,8 +1,5 @@
 export {createCard, likeCard, deleteCard}
 
-
-
-
 // card template
 
 const cardTemplate = document.querySelector("#card-template").content;
