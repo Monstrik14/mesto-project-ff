@@ -63,10 +63,6 @@ function cardRender(container, cardData) {
   container.append(cardData);
 }
 
-initialCards.forEach(function (elem) {
-  cardRender(cardList, createCard(elem, deleteCard, likeCard, openImage));
-});
-
 // edit profile
 
 const popupProfileForm = document.querySelector(".popup_type_edit");

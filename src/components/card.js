@@ -15,8 +15,9 @@ function createCard(cardData, deleteCard, likeCard, openImage) {
   const cardImage = cardElement.querySelector('.card__image');
   const cardTitle = cardElement.querySelector('.card__title');
   const cardLikeBtn = cardElement.querySelector('.card__like-button');
-  const likeButton = document.querySelector('.card__like-button');
-  const likeCounter = document.querySelector('card__like-counter'); 
+  const cardDeletBtn = cardElement.querySelector('.card__delete-button');
+  const likeCounter = cardElement.querySelector('card__like-counter');
+  const cardId = element._id  
 
   cardImage.src = cardData.link;
   cardImage.alt = cardData.name;
@@ -42,6 +43,11 @@ function deleteCard(cardElement) {
 // card like
 
 function likeCard(evt) {
-  if (evt.target.classList.contains('card__like-button')) 
-  {evt.target.classList.toggle('card__like-button_is-active')}
+  if (evt.target.classList.contains('card__like-button')){
+  evt.target.classList.toggle('card__like-button_is-active')
+  const cardData = evt.target.dataset.cardData;
+    const currentLikes = parseInt(cardData.likes) || 0;
+    cardData.likes = currentLikes + (evt.target.classList.contains('card__like-button_is-active') ? 1 : -1);
+    likeCounter.textContent = cardData.likes;
+  }
 } 

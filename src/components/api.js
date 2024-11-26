@@ -22,8 +22,7 @@ export const getInitialCards = () => {
 };
 
 export const getUserData = () => {
-  return
-    fetch(`${config.baseUrl}/users/me`,
+  return fetch(`${config.baseUrl}/users/me`,
     {
       method: "GET",
       headers: config.headers,
@@ -32,8 +31,7 @@ export const getUserData = () => {
 };
 
 export const profileEditing = (name, about) => { 
-return 
-  fetch(`${config.baseUrl}/users/me`, {
+return fetch(`${config.baseUrl}/users/me`, {
   method: 'PATCH',
   headers: config.headers,
   body: JSON.stringify({
@@ -45,8 +43,7 @@ return
 }
 
 export const newCardForServer = (newCard, newLink) => { 
-  return
-    fetch(`${config.baseUrl}/cards`, {
+  return fetch(`${config.baseUrl}/cards`, {
     method: 'POST',
     headers: config.headers,
     body: JSON.stringify({
@@ -58,8 +55,7 @@ export const newCardForServer = (newCard, newLink) => {
   }
 
   export const deleteCardFromServer = (cardId) => {
-    return 
-      fetch(`${config.baseUrl}/cards/${cardId}`), {
+    return fetch(`${config.baseUrl}/cards/${cardId}`), {
       method: 'DELETE',
       headers: config.headers,
       }
@@ -67,8 +63,7 @@ export const newCardForServer = (newCard, newLink) => {
     }
 
   export const putLike = (cardId) => {
-    return 
-      fetch(`${config.baseUrl}/cards/likes/${cardId}`), {
+    return fetch(`${config.baseUrl}/cards/likes/${cardId}`), {
       method: 'PUT',
       headers: config.headers,
       }
@@ -76,16 +71,14 @@ export const newCardForServer = (newCard, newLink) => {
     }
 
     export const deleteLike = (cardId) => {
-      return 
-        fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
+      return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
         method: 'DELETE',
         headers: config.headers,
         })
         .then(getResponse);
       }
       export const editAvatar = (avatar) => {
-        return
-          fetch(`${config.baseUrl}/users/me/avatar`, {
+        return fetch(`${config.baseUrl}/users/me/avatar`, {
           method: 'PATCH',
           headers: config.headers,
           body: JSON.stringify({
