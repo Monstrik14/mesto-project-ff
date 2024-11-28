@@ -41,7 +41,7 @@ function createCard(cardData, likeCard, openImage, userId) {
   });
 
   if (cardData.likes.length > 0) {
-    likeCounter.textContent = el.likes.length;
+    likeCounter.textContent = cardData.likes.length;
   } else {
     likeCounter.textContent = "0";
   }
