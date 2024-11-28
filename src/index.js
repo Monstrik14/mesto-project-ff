@@ -30,7 +30,7 @@ function deleteCard(cardElement, cardId){
       .catch((err) => {
         console.log(err); 
     });
-  }
+  } 
 
 
 // Promise.all(card rendering)
