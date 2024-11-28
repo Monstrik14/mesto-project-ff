@@ -1,4 +1,4 @@
-//import
+// import
 
 import "./pages/index.css";
  
@@ -9,8 +9,7 @@ import {
   validationConfig,
   clearValidation,
 } from "./components/validation"; 
-import { getUserData, getInitialCards, profileEditing, newCardForServer, editAvatar } from './components/api'; 
-// import { initialCards } from "./cards";  
+import { getUserData, getInitialCards, profileEditing, newCardForServer, editAvatar } from './components/api';  
 
 //DOM
 
@@ -19,9 +18,9 @@ const profileName = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__description'); 
 const profileImage = document.querySelector('.profile__image');
 
-//avatar
+// avatar
 
-//delete card
+// delete card
 
 function deleteCard(cardElement, cardId){
   deleteCardFromServer(cardId)
@@ -34,7 +33,8 @@ function deleteCard(cardElement, cardId){
   }
 
 
-//Promise.all
+// Promise.all(card rendering)
+
 let userId = "";
 
 Promise.all([getUserData(), getInitialCards()])
@@ -103,7 +103,7 @@ closeButtons.forEach((item) => {
   });
 });
 
-//form fields
+// form fields
 
 const nameInput = document.querySelector(".popup__input_type_name");
 const jobInput = document.querySelector(".popup__input_type_description");
