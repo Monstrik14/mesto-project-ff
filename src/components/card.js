@@ -20,7 +20,7 @@ function createCard(cardData, likeCard, openImage, userId) {
   const cardId = cardData._id  
 
   cardImage.src = cardData.link;
-  cardImage.alt = `Изображение ${cardData.name}`;
+  cardImage.alt = `картинка ${cardData.name}`;
   cardTitle.textContent = cardData.name;
   likeCounter.textContent = cardData.likes.length;
 
