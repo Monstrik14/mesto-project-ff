@@ -55,18 +55,18 @@ export const newCardForServer = (newCard, newLink) => {
   }
 
   export const deleteCardFromServer = (cardId) => {
-    return fetch(`${config.baseUrl}/cards/${cardId}`), {
+    return fetch(`${config.baseUrl}/cards/${cardId}`, {
       method: 'DELETE',
       headers: config.headers,
-      }
+      })
       .then(getResponse);
     }
 
   export const putLike = (cardId) => {
-    return fetch(`${config.baseUrl}/cards/likes/${cardId}`), {
+    return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
       method: 'PUT',
       headers: config.headers,
-      }
+      })
       .then(getResponse);
     }
 
