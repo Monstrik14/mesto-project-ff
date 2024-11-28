@@ -3,7 +3,7 @@
 import "./pages/index.css";
  
 import { openModal, closeModal } from "./components/modal";
-import { createCard, likeCard, deleteCard } from "./components/card";
+import { createCard, likeCard } from "./components/card";
 import {
   enableValidation,
   validationConfig,
