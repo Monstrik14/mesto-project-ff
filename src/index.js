@@ -21,6 +21,18 @@ const profileImage = document.querySelector('.profile__image');
 
 //avatar
 
+//delete card
+
+function deleteCard(cardElement, cardId){
+  deleteCardFromServer(cardId)
+      .then(() => {
+        cardElement.remove();
+      })
+      .catch((err) => {
+        console.log(err); 
+    });
+  }
+
 
 //Promise.all
 let userId = "";

@@ -64,16 +64,29 @@ function createCard(cardData, likeCard, openImage, userId) {
 }
 }
 
-// delete card
-
-function deleteCard(cardElement) {
-  cardElement.remove();
-}
-
 // card like
 
-function likeCard(evt) {
-  if (evt.target.classList.contains('card__like-button')){
-  evt.target.classList.toggle('card__like-button_is-active')
+function likeCard(evt, cardId, likeCounter) {
+  const likePlaced = evt.target
+  putlike(cardId)
+  if (!likePlaced.classList.contains('card__like-button_is-active')) {
+    addLike(cardId)
+    .then((res) => {
+      likePlaced.classList.add('card__like-button_is-active')
+      likeCounter.textContent = res.likes.length
+    })
+    .catch((err) => {
+      console.log(err);
+  })
   }
-} 
+  else {
+    deleteLike(cardId)
+    .then((res) => {
+      likePlaced.classList.remove('card__like-button_is-active')
+      likeCounter.textContent = res.likes.length
+    })
+    .catch((err) => {
+      console.log(err);
+  })
+  }
+}
