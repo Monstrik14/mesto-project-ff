@@ -1,4 +1,5 @@
 export { createCard, likeCard };
+import {deleteCardFromServer, putLike, deleteLike } from './api'
 
 // card template
 
@@ -15,8 +16,8 @@ function createCard(cardData, likeCard, openImage, userId) {
   const cardTitle = cardElement.querySelector(".card__title");
   const cardLikeBtn = cardElement.querySelector(".card__like-button");
   const cardDeletBtn = cardElement.querySelector(".card__delete-button");
-  const likeCounter = cardElement.querySelector("card__like-counter");
-  const cardId = cardData._id;
+  const likeCounter = cardElement.querySelector(".card__like-counter");
+  const cardId = cardData._id; 
 
   cardImage.src = cardData.link;
   cardImage.alt = `картинка ${cardData.name}`;
@@ -68,9 +69,8 @@ function createCard(cardData, likeCard, openImage, userId) {
 
 function likeCard(evt, cardId, likeCounter) {
   const likePlaced = evt.target;
-  putlike(cardId);
   if (!likePlaced.classList.contains("card__like-button_is-active")) {
-    addLike(cardId)
+    putLike(cardId)
       .then((res) => {
         likePlaced.classList.add("card__like-button_is-active");
         likeCounter.textContent = res.likes.length;
