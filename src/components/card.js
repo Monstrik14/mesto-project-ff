@@ -1,5 +1,5 @@
 export { createCard, likeCard };
-import {deleteCardFromServer, putLike, deleteLike } from './api'
+import { deleteCardFromServer, putLike, deleteLike } from './api'
 
 // card template
 

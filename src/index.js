@@ -9,16 +9,24 @@ import {
   validationConfig,
   clearValidation,
 } from "./components/validation"; 
-import { getUserData, getInitialCards, profileEditing, newCardForServer, editAvatar } from './components/api';  
+import { getUserData, getInitialCards, profileEditing, newCardForServer, editAvatar, deleteCardFromServer } from './components/api';  
 
 //DOM
 
+const cardList = document.querySelector(".places__list");
+const newCardBtn = document.querySelector(".profile__add-button");
 const placesList = document.querySelector('.places__list')
 const profileName = document.querySelector('.profile__title'); 
 const profileDescription = document.querySelector('.profile__description'); 
 const profileImage = document.querySelector('.profile__image');
+const popupAvatar = document.querySelector('.popup__avatar-change')
+const avatarBtn = document.querySelector('.profile__image')
+const avatarForm = document.querySelector('.popup__form')
+const avatarInput = document.querySelector('.popup__input_type_url-avatar')
 
 // avatar
+
+
 
 // delete card
 
@@ -49,11 +57,6 @@ Promise.all([getUserData(), getInitialCards()])
       placesList.append(newCard)
     })
   })
-
-// DOM
-
-const cardList = document.querySelector(".places__list");
-const newCardBtn = document.querySelector(".profile__add-button");
 
 // open image by click
 
@@ -140,9 +143,11 @@ newCardForm.addEventListener("submit", function (evt) {
 
   const newCardElement = createCard(
     newCardValues,
+    cardData,
     deleteCard,
     likeCard,
-    openImage
+    openImage,
+    userId
   );
 
   cardList.prepend(newCardElement);
@@ -160,6 +165,3 @@ newCardBtn.addEventListener("click", function (evt) {
 
 enableValidation(validationConfig);
 
-const showLoading = (button) => {
-  button.textContent = 'Сохранение...';
- };
