@@ -149,15 +149,12 @@ newCardForm.addEventListener("submit", function (evt) {
       likeCard,
       openImage,
       userId
-    );
+    )
+    cardList.prepend(newCardElement);
+    evt.target.reset();
+    closeModal(newCardForm);
   })
-
-
-
-  cardList.prepend(newCardElement);
-  evt.target.reset();
-  closeModal(newCardForm);
-});
+}) 
 
 newCardBtn.addEventListener("click", function (evt) {
   evt.preventDefault();
