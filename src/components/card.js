@@ -1,5 +1,5 @@
 export { createCard, likeCard };
-import { deleteCardFromServer, putLike, deleteLike } from './api'
+import { deleteCardFromServer, putLike, deleteLike } from "./api";
 
 // card template
 
@@ -7,7 +7,7 @@ const cardTemplate = document.querySelector("#card-template").content;
 
 // create card
 
-function createCard(cardData, likeCard, openImage, userId) {
+function createCard(element, likeCard, deleteCard, openImage, userId) {
   const cardElement = cardTemplate
     .querySelector(".places__item")
     .cloneNode(true);
@@ -16,53 +16,39 @@ function createCard(cardData, likeCard, openImage, userId) {
   const cardTitle = cardElement.querySelector(".card__title");
   const cardLikeBtn = cardElement.querySelector(".card__like-button");
   const cardDeletBtn = cardElement.querySelector(".card__delete-button");
-  const likeCounter = cardElement.querySelector(".card__like-counter"); 
-  const cardId = cardData._id; 
+  const likeCounter = cardElement.querySelector(".card__like-counter");
+  const cardId = element._id;
 
-  cardImage.src = cardData.link;
-  cardImage.alt = `картинка ${cardData.name}`;
-  cardTitle.textContent = cardData.name;
-  likeCounter.textContent = cardData.likes.length;
+  cardImage.src = element.link;
+  cardImage.alt = `картинка ${element.name}`;
+  cardTitle.textContent = element.name;
+  likeCounter.textContent = element.likes.length;
 
   cardLikeBtn.addEventListener("click", (evt) => {
     likeCard(evt, likeCounter, cardId);
   });
 
-  cardImage.addEventListener("click", () => openImage(cardData));
+  cardImage.addEventListener("click", () => openImage(element));
 
-  cardDeletBtn.addEventListener("click", () => {
-    deleteCardFromServer(cardId)
-      .then(() => {
-        cardElement.remove();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  });
-
-  if (cardData.likes.length > 0) {
-    likeCounter.textContent = cardData.likes.length;
+  if (element.likes.length > 0) {
+    likeCounter.textContent = element.likes.length;
   } else {
     likeCounter.textContent = "0";
   }
 
-  if (cardData.likes.some((like) => like._id == userId)) {
+  if (element.likes.some((like) => like._id == userId)) {
     cardLikeBtn.classList.add("card__like-button_is-active");
   }
 
-  if (userId != userId) {
-    cardDeletBtn.remove();
+  if (userId === element.owner._id) {
+    cardDeletBtn.addEventListener("click", () => {
+      deleteCard(element, cardElement);
+    });
   } else {
-    deleteCardFromServer(cardTemplate, cardId);
-
-    if (userId === cardData.owner._id) {
-      cardDeletBtn.style.display = "block";
-    } else {
-      cardDeletBtn.style.display = "none";
-    }
-
-    return cardElement;
+    cardDeletBtn.remove();
   }
+
+  return cardElement;
 }
 
 // card like
