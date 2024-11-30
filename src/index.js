@@ -141,14 +141,18 @@ newCardForm.addEventListener("submit", function (evt) {
     link: newCardLink.value,
   };
 
-  const newCardElement = createCard(
-    newCardValues,
-    cardData,
-    deleteCard,
-    likeCard,
-    openImage,
-    userId
-  );
+  newCardForServer(newCardValues)
+  .then((cardData) => {
+    const newCardElement = createCard(
+      cardData,
+      deleteCard,
+      likeCard,
+      openImage,
+      userId
+    );
+  })
+
+
 
   cardList.prepend(newCardElement);
   evt.target.reset();
