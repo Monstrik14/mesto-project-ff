@@ -144,6 +144,7 @@ newCardForm.addEventListener("submit", function (evt) {
   newCardForServer(newCardValues)
   .then((res) => {
     const newCardElement = createCard(res, likeCard, deleteCard, openImage, userId)
+    
     cardList.prepend(newCardElement);
     evt.target.reset();
     closeModal(newCardForm);
