@@ -20,6 +20,7 @@ import {
 
 //DOM
 
+const formForNewPlace = document.forms["new-place"];
 const cardList = document.querySelector(".places__list");
 const newCardBtn = document.querySelector(".profile__add-button");
 const placesList = document.querySelector(".places__list");
@@ -28,9 +29,8 @@ const profileDescription = document.querySelector(".profile__description");
 const profileImage = document.querySelector(".profile__image");
 const popupAvatar = document.querySelector(".popup__avatar-change");
 const avatarClick = document.querySelector(".profile__image");
-const avatarForm = document.querySelector(".popup__form");
+const avatarForm = document.forms["avatar-change"];
 const avatarUrl = document.querySelector(".popup__input_type_url-avatar");
-const avatarSaveBtn = document.querySelector(".popup__button");
 
 // avatar
 
@@ -41,23 +41,24 @@ profileImage.addEventListener("click", () => {
 
 avatarForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
-  buttonElement.textContent = "Сохранение";
+  const avatarSaveBtn = document.querySelector(".popup__button");
+  avatarSaveBtn.textContent = "Сохранение";
   editAvatar(avatarUrl.value)
     .then((res) => {
       avatarClick.style.backgroundImage = `url(${res.avatar})`;
       closeModal(popupAvatar);
     })
     .finally(() => {
-      buttonElement.textContent = "Сохранить";
+      avatarSaveBtn.textContent = "Сохранить";
     });
 });
 
 // delete card
 
 function deleteCard(element, cardElement) {
-  deleteCardFromServer(cardId)
+  deleteCardFromServer(element._id)
     .then(() => {
-      element.remove();
+      cardElement.remove();
     })
     .catch((err) => {
       console.log(err);
@@ -165,25 +166,24 @@ const newCardLink = document.querySelector(".popup__input_type_url");
 
 newCardForm.addEventListener("submit", function (evt) {
   evt.preventDefault();
-
-  const newCardValues = {
-    name: newCardName.value,
-    link: newCardLink.value,
-  };
-
-  newCardForServer(newCardValues).then((res) => {
-    const newCardElement = createCard(
-      res,
-      likeCard,
-      deleteCard,
-      openImage,
-      userId
-    );
-
-    cardList.prepend(newCardElement);
-    evt.target.reset();
-    closeModal(newCardForm);
-  });
+  const newCardFormSaveBtn = document.querySelector(".popup__button");
+  newCardFormSaveBtn.textContent = "Сохранение";
+  newCardForServer(newcard.name, newname.link)
+    .then((res) => {
+      const newCardElement = createCard(
+        res,
+        likeCard,
+        deleteCard,
+        openImage,
+        userId
+      );
+      cardList.prepend(newCardElement);
+      formForNewPlace.reset();
+      closeModal(newCardForm);
+    })
+    .finally(() => {
+      newCardFormSaveBtn.textContent = "Сохранить";
+    });
 });
 
 newCardBtn.addEventListener("click", function (evt) {
