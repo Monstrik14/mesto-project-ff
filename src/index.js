@@ -42,7 +42,7 @@ profileImage.addEventListener("click", () => {
 
 avatarForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
-  const avatarSaveBtn = document.querySelector(".popup__button");
+  const avatarSaveBtn = popupAvatar.querySelector(".popup__button");
   avatarSaveBtn.textContent = "Сохранение";
   editAvatar(avatarUrl.value)
     .then((res) => {
@@ -167,7 +167,7 @@ const newCardLink = document.querySelector(".popup__input_type_url");
 
 newCardForm.addEventListener("submit", function (evt) {
   evt.preventDefault();
-  const newCardFormSaveBtn = popupTypeNewCard.querySelector("popup__button");
+  const newCardFormSaveBtn = popupTypeNewCard.querySelector(".popup__button");
   newCardFormSaveBtn.textContent = "Сохранение";
   newCardForServer(newcard.name, newname.link)
     .then((res) => {
