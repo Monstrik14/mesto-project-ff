@@ -169,7 +169,7 @@ newCardForm.addEventListener("submit", function (evt) {
   evt.preventDefault();
   const newCardFormSaveBtn = popupTypeNewCard.querySelector(".popup__button");
   newCardFormSaveBtn.textContent = "Сохранение...";
-  newCardForServer(newCardNameInput.value, newCardLinkInput.value)
+  newCardForServer(newCardNameInput.value, newCardLinkInput.value) 
     .then((res) => {
       const newCardElement = createCard(
         res,
