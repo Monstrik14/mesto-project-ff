@@ -45,7 +45,7 @@ profileImage.addEventListener("click", () => {
 avatarForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
   const avatarSaveBtn = popupAvatar.querySelector(".popup__button");
-  avatarSaveBtn.textContent = "Сохранение";
+  avatarSaveBtn.textContent = "Сохранение...";
   editAvatar(avatarUrl.value)
     .then((res) => {
       avatarClick.style.backgroundImage = `url(${res.avatar})`;
@@ -168,7 +168,7 @@ const newCardForm = document.querySelector(".popup_type_new-card");
 newCardForm.addEventListener("submit", function (evt) {
   evt.preventDefault();
   const newCardFormSaveBtn = popupTypeNewCard.querySelector(".popup__button");
-  newCardFormSaveBtn.textContent = "Сохранение";
+  newCardFormSaveBtn.textContent = "Сохранение...";
   newCardForServer(newCardNameInput.value, newCardLinkInput.value)
     .then((res) => {
       const newCardElement = createCard(
