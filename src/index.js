@@ -30,16 +30,15 @@ const avatarInput = document.querySelector('.popup__input_type_url-avatar')
 
 // delete card
 
-function deleteCard(cardElement, cardId){
+function deleteCard(element, cardElement){
   deleteCardFromServer(cardId)
       .then(() => {
-        cardElement.remove();
+        element.remove();
       })
       .catch((err) => {
         console.log(err); 
     });
-  } 
-
+  }
 
 // Promise.all(card rendering)
 

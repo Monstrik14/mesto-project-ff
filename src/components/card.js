@@ -25,7 +25,7 @@ function createCard(element, likeCard, deleteCard, openImage, userId) {
   likeCounter.textContent = element.likes.length;
 
   cardLikeBtn.addEventListener("click", (evt) => {
-    likeCard(evt, likeCounter, cardId);
+    likeCard(evt, cardId, likeCounter);
   });
 
   cardImage.addEventListener("click", () => openImage(element));
