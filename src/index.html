@@ -25,7 +25,15 @@
             style="
               background-image: url(<%=require('./images/avatar.jpg')%>);
             "
-          ></div>
+          >
+            <div class="avatar__overlay">
+              <img
+                src="<%=require('./images/edit-icon.')%>"
+                alt="Аватар пользователя"
+                class="avatar__overlay-image"
+              />
+            </div>
+          </div>
           <div class="profile__info">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
             <button class="profile__edit-button" type="button"></button>

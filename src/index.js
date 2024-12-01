@@ -20,13 +20,23 @@ const profileName = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__description'); 
 const profileImage = document.querySelector('.profile__image');
 const popupAvatar = document.querySelector('.popup__avatar-change')
-const avatarBtn = document.querySelector('.profile__image')
+const avatarClick = document.querySelector('.profile__image')
 const avatarForm = document.querySelector('.popup__form')
-const avatarInput = document.querySelector('.popup__input_type_url-avatar')
+const avatarUrl = document.querySelector('.popup__input_type_url-avatar')
+const avatarSaveBtn = document.querySelector('.popup__button')
 
 // avatar
 
+profileImage.addEventListener('click',() => {
+  openModal(popupAvatar)
+  clearValidation(popupAvatar, validationConfig)
+})
 
+avatarForm.addEventListener('submit', (evt) => {
+evt.preventDefault()
+editAvatar(avatarUrl.value)
+
+})
 
 // delete card
 
