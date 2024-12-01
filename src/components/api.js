@@ -48,7 +48,7 @@ export const newCardForServer = (newCard) => {
     headers: config.headers,
     body: JSON.stringify({
       name: newCard.name,
-      link: newLink.link,
+      link: newCard.link,
     })
     })
   .then(getResponse);

@@ -20,9 +20,9 @@ import {
 
 //DOM
 
+const popupTypeNewCard = document.querySelector(".popup_type_new-card");
 const newCardNameInput = popupTypeNewCard.querySelector('.popup__input_type_card-name');
 const newCardLinkInput = popupTypeNewCard.querySelector('.popup__input_type_url');
-const popupTypeNewCard = document.querySelector(".popup_type_new-card");
 const formForNewPlace = document.forms["new-place"];
 const cardList = document.querySelector(".places__list");
 const newCardBtn = document.querySelector(".profile__add-button");
