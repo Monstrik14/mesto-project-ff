@@ -18,11 +18,12 @@
   opacity: 0;
 }
 
-.avatar__overlay-image {
+.avatar__overlay-feltpen {
   position: absolute;
   color: rgba(255, 255, 255, 1);
   width: 26px;
   height: 26px;
+  transition: 0.3s;
   opacity: 1;
 }
 

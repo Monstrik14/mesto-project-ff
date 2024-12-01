@@ -1,71 +1,92 @@
 // import
 
 import "./pages/index.css";
- 
+
 import { openModal, closeModal } from "./components/modal";
 import { createCard, likeCard } from "./components/card";
 import {
   enableValidation,
   validationConfig,
   clearValidation,
-} from "./components/validation"; 
-import { getUserData, getInitialCards, profileEditing, newCardForServer, editAvatar, deleteCardFromServer } from './components/api';  
+} from "./components/validation";
+import {
+  getUserData,
+  getInitialCards,
+  profileEditing,
+  newCardForServer,
+  editAvatar,
+  deleteCardFromServer,
+} from "./components/api";
 
 //DOM
 
 const cardList = document.querySelector(".places__list");
 const newCardBtn = document.querySelector(".profile__add-button");
-const placesList = document.querySelector('.places__list')
-const profileName = document.querySelector('.profile__title'); 
-const profileDescription = document.querySelector('.profile__description'); 
-const profileImage = document.querySelector('.profile__image');
-const popupAvatar = document.querySelector('.popup__avatar-change')
-const avatarClick = document.querySelector('.profile__image')
-const avatarForm = document.querySelector('.popup__form')
-const avatarUrl = document.querySelector('.popup__input_type_url-avatar')
-const avatarSaveBtn = document.querySelector('.popup__button')
+const placesList = document.querySelector(".places__list");
+const profileName = document.querySelector(".profile__title");
+const profileDescription = document.querySelector(".profile__description");
+const profileImage = document.querySelector(".profile__image");
+const popupAvatar = document.querySelector(".popup__avatar-change");
+const avatarClick = document.querySelector(".profile__image");
+const avatarForm = document.querySelector(".popup__form");
+const avatarUrl = document.querySelector(".popup__input_type_url-avatar");
+const avatarSaveBtn = document.querySelector(".popup__button");
 
 // avatar
 
-profileImage.addEventListener('click',() => {
-  openModal(popupAvatar)
-  clearValidation(popupAvatar, validationConfig)
-})
+profileImage.addEventListener("click", () => {
+  openModal(popupAvatar);
+  clearValidation(popupAvatar, validationConfig);
+});
 
-avatarForm.addEventListener('submit', (evt) => {
-evt.preventDefault()
-editAvatar(avatarUrl.value)
-
-})
+avatarForm.addEventListener("submit", (evt) => {
+  evt.preventDefault();
+  buttonElement.textContent = "Сохранение";
+  editAvatar(avatarUrl.value)
+    .then((res) => {
+      avatarClick.style.backgroundImage = `url(${res.avatar})`;
+      closeModal(popupAvatar);
+    })
+    .finally(() => {
+      buttonElement.textContent = "Сохранить";
+    });
+});
 
 // delete card
 
-function deleteCard(element, cardElement){
+function deleteCard(element, cardElement) {
   deleteCardFromServer(cardId)
-      .then(() => {
-        element.remove();
-      })
-      .catch((err) => {
-        console.log(err); 
+    .then(() => {
+      element.remove();
+    })
+    .catch((err) => {
+      console.log(err);
     });
-  }
+}
 
 // Promise.all(card rendering)
 
 let userId = "";
 
-Promise.all([getUserData(), getInitialCards()])
-  .then(([userData, cardsData]) => {
-    profileName.textContent = userData.name
-    profileDescription.textContent = userData.about
+Promise.all([getUserData(), getInitialCards()]).then(
+  ([userData, cardsData]) => {
+    profileName.textContent = userData.name;
+    profileDescription.textContent = userData.about;
     profileImage.style.backgroundImage = `url(${userData.avatar})`;
-    
-    userId = userData._id
+
+    userId = userData._id;
     cardsData.forEach((element) => {
-      const newCard = createCard(element, likeCard, deleteCard, openImage, userId)
-      placesList.append(newCard)
-    })
-  })
+      const newCard = createCard(
+        element,
+        likeCard,
+        deleteCard,
+        openImage,
+        userId
+      );
+      placesList.append(newCard);
+    });
+  }
+);
 
 // open image by click
 
@@ -79,7 +100,7 @@ function openImage(cardData) {
   captionPopup.textContent = cardData.name;
 
   openModal(image);
-} 
+}
 
 // edit profile
 
@@ -150,15 +171,20 @@ newCardForm.addEventListener("submit", function (evt) {
     link: newCardLink.value,
   };
 
-  newCardForServer(newCardValues)
-  .then((res) => {
-    const newCardElement = createCard(res, likeCard, deleteCard, openImage, userId)
-    
+  newCardForServer(newCardValues).then((res) => {
+    const newCardElement = createCard(
+      res,
+      likeCard,
+      deleteCard,
+      openImage,
+      userId
+    );
+
     cardList.prepend(newCardElement);
     evt.target.reset();
     closeModal(newCardForm);
-  })
-}) 
+  });
+});
 
 newCardBtn.addEventListener("click", function (evt) {
   evt.preventDefault();
@@ -166,7 +192,6 @@ newCardBtn.addEventListener("click", function (evt) {
   openModal(newCardForm);
 
   clearValidation(newCardForm, validationConfig);
-}); 
+});
 
 enableValidation(validationConfig);
-
