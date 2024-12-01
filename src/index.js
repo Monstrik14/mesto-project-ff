@@ -20,7 +20,9 @@ import {
 
 //DOM
 
-const popupTypeNewCard = document.querySelector('.popup_type_new-card')
+const newCardNameInput = document.querySelector('.popup__input_type_card-name');
+const newCardLinkInput = document.querySelector('.popup__input_type_url');
+const popupTypeNewCard = document.querySelector(".popup_type_new-card");
 const formForNewPlace = document.forms["new-place"];
 const cardList = document.querySelector(".places__list");
 const newCardBtn = document.querySelector(".profile__add-button");
@@ -160,8 +162,6 @@ popupProfileForm.addEventListener("submit", handleProfileFormSubmit);
 // add new card
 
 const newCardForm = document.querySelector(".popup_type_new-card");
-const newCardName = document.querySelector(".popup__input_type_card-name");
-const newCardLink = document.querySelector(".popup__input_type_url");
 
 // new card
 
@@ -169,7 +169,7 @@ newCardForm.addEventListener("submit", function (evt) {
   evt.preventDefault();
   const newCardFormSaveBtn = popupTypeNewCard.querySelector(".popup__button");
   newCardFormSaveBtn.textContent = "Сохранение";
-  newCardForServer(newcard.name, newname.link)
+  newCardForServer(newCardNameInput, newCardLinkInput)
     .then((res) => {
       const newCardElement = createCard(
         res,
