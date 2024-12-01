@@ -20,8 +20,8 @@ import {
 
 //DOM
 
-const newCardNameInput = document.querySelector('.popup__input_type_card-name');
-const newCardLinkInput = document.querySelector('.popup__input_type_url');
+const newCardNameInput = popupTypeNewCard.querySelector('.popup__input_type_card-name');
+const newCardLinkInput = popupTypeNewCard.querySelector('.popup__input_type_url');
 const popupTypeNewCard = document.querySelector(".popup_type_new-card");
 const formForNewPlace = document.forms["new-place"];
 const cardList = document.querySelector(".places__list");
