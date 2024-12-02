@@ -134,8 +134,8 @@ function editAndSubmitProfile(evt) {
     .then(() => {
       profileName.textContent = nameInput.value;
       profileDescription.textContent = jobInput.value;
-      formEditProfile.reset()
-      closeModal(popupAvatar)
+      formEditProfile.reset();
+      closeModal(popupAvatar);
     })
     .finally(() => {
       profileSaveBtn.textContent = "Сохранить";
