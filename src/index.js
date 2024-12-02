@@ -185,14 +185,14 @@ newCardForm.addEventListener("submit", function (evt) {
   newCardFormSaveBtn.textContent = "Сохранение...";
   newCardForServer(newCardNameInput.value, newCardLinkInput.value)
     .then((res) => {
-      const newCardElement = createCard(
+      const newCardOnPage = createCard(
         res,
         likeCard,
         deleteCard,
         openImage,
         userId
       );
-      cardList.prepend(newCardElement);
+      cardList.prepend(newCardOnPage);
       formForNewPlace.reset();
       closeModal(newCardForm);
     })
