@@ -24,11 +24,12 @@ const popupTypeNewCard = document.querySelector(".popup_type_new-card");
 const newCardNameInput = popupTypeNewCard.querySelector('.popup__input_type_card-name');
 const newCardLinkInput = popupTypeNewCard.querySelector('.popup__input_type_url');
 const formForNewPlace = document.forms["new-place"];
+const formEditProfile = document.forms['edit-profile'];
+const profileName = document.querySelector(".profile__title");
+const profileDescription = document.querySelector(".profile__description");
 const cardList = document.querySelector(".places__list");
 const newCardBtn = document.querySelector(".profile__add-button");
 const placesList = document.querySelector(".places__list");
-const profileName = document.querySelector(".profile__title");
-const profileDescription = document.querySelector(".profile__description");
 const profileImage = document.querySelector(".profile__image");
 const popupAvatar = document.querySelector(".popup__avatar-change");
 const avatarClick = document.querySelector(".profile__image");
@@ -112,16 +113,31 @@ const popupProfileForm = document.querySelector(".popup_type_edit");
 const editProfileBtn = document.querySelector(".profile__edit-button");
 const closeButtons = document.querySelectorAll(".popup__close");
 
-editProfileBtn.addEventListener("click", function (evt) {
-  evt.preventDefault();
-
-  clearValidation(popupProfileForm, validationConfig);
-
+editProfileBtn.addEventListener("click", () => {
   nameInput.value = userName.textContent;
   jobInput.value = userDescription.textContent;
-
+  clearValidation(formEditProfile. validationConfig)
   openModal(popupProfileForm);
-});
+})
+
+function editAndSubmitProfile(evt) {
+  evt.preventDefault();
+  const profileSaveBtn = popupProfileForm.querySelector(".popup__button");
+  profileSaveBtn.textContent = "Сохранение..."
+  profileEditing(nameInput.value, jobInput.value)
+    .then((res) => {
+      profileName.textContent = res.name
+      profileDescription.textContent = res.about
+      closeModal(popupAvatar);
+      formEditProfile.reset()
+      clearValidation(popupProfileForm, validationConfig);
+    })
+    .finally(() => {
+      profileSaveBtn.textContent = "Сохранить";
+    });
+  }
+
+  formEditProfile.addEventListener('submit', editAndSubmitProfile)
 
 const popups = document.querySelectorAll(".popup");
 
