@@ -21,10 +21,14 @@ import {
 //DOM
 
 const popupTypeNewCard = document.querySelector(".popup_type_new-card");
-const newCardNameInput = popupTypeNewCard.querySelector('.popup__input_type_card-name');
-const newCardLinkInput = popupTypeNewCard.querySelector('.popup__input_type_url');
+const newCardNameInput = popupTypeNewCard.querySelector(
+  ".popup__input_type_card-name"
+);
+const newCardLinkInput = popupTypeNewCard.querySelector(
+  ".popup__input_type_url"
+);
 const formForNewPlace = document.forms["new-place"];
-const formEditProfile = document.forms['edit-profile'];
+const formEditProfile = document.forms["edit-profile"];
 const profileName = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
 const cardList = document.querySelector(".places__list");
@@ -111,37 +115,34 @@ function openImage(cardData) {
 
 const nameInput = document.querySelector(".popup__input_type_name");
 const jobInput = document.querySelector(".popup__input_type_description");
-const userName = document.querySelector(".profile__title");
-const userDescription = document.querySelector(".profile__description");
 const popupProfileForm = document.querySelector(".popup_type_edit");
 const editProfileBtn = document.querySelector(".profile__edit-button");
 const closeButtons = document.querySelectorAll(".popup__close");
 
-editProfileBtn.addEventListener("click", () => {
-  nameInput.value = userName.textContent;
-  jobInput.value = userDescription.textContent;
-  clearValidation(formEditProfile. validationConfig)
+editProfileBtn.addEventListener("click", (evt) => {
+  evt.preventDefault();
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileDescription.textContent;
   openModal(popupProfileForm);
-})
+});
 
 function editAndSubmitProfile(evt) {
   evt.preventDefault();
   const profileSaveBtn = popupProfileForm.querySelector(".popup__button");
-  profileSaveBtn.textContent = "Сохранение..."
-  profileEditing(nameInput.value, jobInput.value)
-    .then((res) => {
-      profileName.textContent = res.name
-      profileDescription.textContent = res.about
-      closeModal(popupAvatar);
+  profileSaveBtn.textContent = "Сохранение...";
+  profileEditing(profileName.textContent, profileDescription.textContent)
+    .then(() => {
+      profileName.textContent = nameInput.value;
+      profileDescription.textContent = jobInput.value;
       formEditProfile.reset()
-      clearValidation(popupProfileForm, validationConfig);
+      closeModal(popupAvatar)
     })
     .finally(() => {
       profileSaveBtn.textContent = "Сохранить";
     });
-  }
+}
 
-  formEditProfile.addEventListener('submit', editAndSubmitProfile)
+formEditProfile.addEventListener("submit", editAndSubmitProfile);
 
 const popups = document.querySelectorAll(".popup");
 
@@ -165,8 +166,8 @@ closeButtons.forEach((item) => {
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
 
-  userName.textContent = nameInput.value;
-  userDescription.textContent = jobInput.value;
+  profileName.textContent = nameInput.value;
+  profileDescription.textContent = jobInput.value;
 
   closeModal(popupProfileForm);
 }
@@ -183,7 +184,7 @@ newCardForm.addEventListener("submit", function (evt) {
   evt.preventDefault();
   const newCardFormSaveBtn = popupTypeNewCard.querySelector(".popup__button");
   newCardFormSaveBtn.textContent = "Сохранение...";
-  newCardForServer(newCardNameInput.value,newCardLinkInput.value)
+  newCardForServer(newCardNameInput.value, newCardLinkInput.value)
     .then((res) => {
       const newCardOnPage = createCard(
         res,
