@@ -55,6 +55,8 @@ avatarForm.addEventListener("submit", (evt) => {
     .then((res) => {
       avatarClick.style.backgroundImage = `url(${res.avatar})`;
       closeModal(popupAvatar);
+      avatarForm.reset()
+      clearValidation(avatarForm, validationConfig)
     })
     .finally(() => {
       avatarSaveBtn.textContent = "Сохранить";
@@ -136,6 +138,7 @@ function editAndSubmitProfile(evt) {
       profileDescription.textContent = jobInput.value;
       formEditProfile.reset();
       closeModal(popupAvatar);
+      clearValidation(formEditProfile, validationConfig)
     })
     .finally(() => {
       profileSaveBtn.textContent = "Сохранить";
@@ -195,6 +198,7 @@ newCardForm.addEventListener("submit", function (evt) {
       );
       cardList.prepend(newCardOnPage);
       formForNewPlace.reset();
+      clearValidation(formForNewPlace, validationConfig)
       closeModal(newCardForm);
     })
     .finally(() => {
