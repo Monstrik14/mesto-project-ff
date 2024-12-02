@@ -109,6 +109,10 @@ function openImage(cardData) {
 
 // edit profile
 
+const nameInput = document.querySelector(".popup__input_type_name");
+const jobInput = document.querySelector(".popup__input_type_description");
+const userName = document.querySelector(".profile__title");
+const userDescription = document.querySelector(".profile__description");
 const popupProfileForm = document.querySelector(".popup_type_edit");
 const editProfileBtn = document.querySelector(".profile__edit-button");
 const closeButtons = document.querySelectorAll(".popup__close");
@@ -157,12 +161,6 @@ closeButtons.forEach((item) => {
 });
 
 // form fields
-
-const nameInput = document.querySelector(".popup__input_type_name");
-const jobInput = document.querySelector(".popup__input_type_description");
-
-const userName = document.querySelector(".profile__title");
-const userDescription = document.querySelector(".profile__description");
 
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();

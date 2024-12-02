@@ -42,14 +42,18 @@ return fetch(`${config.baseUrl}/users/me`, {
 .then(getResponse)
 }
 
-export const newCardForServer = (cardData) => { 
+export const newCardForServer = (newCardName, newCardLink) => { 
   return fetch(`${config.baseUrl}/cards`, {
     method: 'POST',
     headers: config.headers,
-    body: JSON.stringify(cardData)
+    body: JSON.stringify({
+      name: newCardName,
+      link: newCardLink
     })
+  })
   .then(getResponse);
-  }
+
+}
 
   export const deleteCardFromServer = (cardId) => {
     return fetch(`${config.baseUrl}/cards/${cardId}`, {
