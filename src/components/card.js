@@ -1,5 +1,17 @@
-export { createCard, likeCard };
+export { createCard, likeCard, deleteCard };
 import { deleteCardFromServer, putLike, deleteLike } from "./api";
+
+// delete card
+
+function deleteCard(element, cardElement) {
+  deleteCardFromServer(element._id)
+    .then(() => {
+      cardElement.remove();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
 
 // card template
 

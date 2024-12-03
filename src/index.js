@@ -3,10 +3,9 @@
 import "./pages/index.css";
 
 import { openModal, closeModal } from "./components/modal";
-import { createCard, likeCard } from "./components/card";
+import { createCard, likeCard, deleteCard } from "./components/card";
 import {
   enableValidation,
-  validationConfig,
   clearValidation,
 } from "./components/validation";
 import {
@@ -17,6 +16,17 @@ import {
   editAvatar,
   deleteCardFromServer,
 } from "./components/api";
+
+//validationConfig
+
+const validationConfig = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button",
+  inactiveButtonClass: "popup__button_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__error_visible",
+};
 
 //DOM
 
@@ -63,24 +73,14 @@ avatarForm.addEventListener("submit", (evt) => {
     });
 });
 
-// delete card
 
-function deleteCard(element, cardElement) {
-  deleteCardFromServer(element._id)
-    .then(() => {
-      cardElement.remove();
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-}
 
 // Promise.all(card rendering)
 
 let userId = "";
 
-Promise.all([getUserData(), getInitialCards()]).then(
-  ([userData, cardsData]) => {
+Promise.all([getUserData(), getInitialCards()])
+.then(([userData, cardsData]) => {
     profileName.textContent = userData.name;
     profileDescription.textContent = userData.about;
     profileImage.style.backgroundImage = `url(${userData.avatar})`;
@@ -96,8 +96,10 @@ Promise.all([getUserData(), getInitialCards()]).then(
       );
       placesList.append(newCard);
     });
-  }
-);
+  })
+  .catch((err) => {
+    console.log(err)
+  })
 
 // open image by click
 
@@ -126,6 +128,7 @@ editProfileBtn.addEventListener("click", (evt) => {
   nameInput.value = profileName.textContent;
   jobInput.value = profileDescription.textContent;
   openModal(popupProfileForm);
+  clearValidation(popupProfileForm, validationConfig)
 });
 
 function editAndSubmitProfile(evt) {
@@ -136,9 +139,7 @@ function editAndSubmitProfile(evt) {
     .then(() => {
       profileName.textContent = nameInput.value;
       profileDescription.textContent = jobInput.value;
-      formEditProfile.reset();
-      closeModal(popupAvatar);
-      clearValidation(formEditProfile, validationConfig)
+      closeModal(popupProfileForm);
     })
     .finally(() => {
       profileSaveBtn.textContent = "Сохранить";
@@ -163,19 +164,6 @@ closeButtons.forEach((item) => {
     closeModal(modal);
   });
 });
-
-// form fields
-
-function handleProfileFormSubmit(evt) {
-  evt.preventDefault();
-
-  profileName.textContent = nameInput.value;
-  profileDescription.textContent = jobInput.value;
-
-  closeModal(popupProfileForm);
-}
-
-popupProfileForm.addEventListener("submit", handleProfileFormSubmit);
 
 // add new card
 
