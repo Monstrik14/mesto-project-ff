@@ -73,8 +73,6 @@ avatarForm.addEventListener("submit", (evt) => {
     });
 });
 
-
-
 // Promise.all(card rendering)
 
 let userId = "";
